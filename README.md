@@ -21,7 +21,7 @@ simulation/
 
 - Python 3.9 or newer
 - numpy and scipy
-- matplotlib (optional; without it, the plots are skipped)
+- matplotlib (optional but recommended; interpreting the simulation without plots can be difficult, particularly for troubleshooting)
 
 ```
 pip install numpy scipy matplotlib
@@ -58,23 +58,16 @@ Sample output (`novapor.py`, defaults):
 ------------------------------------------------------------------------
 ```
 
-The top block repeats the parameters the run used, including the Blake threshold: the lowest pressure amplitude above which violent (inertial) collapse is expected. The bottom block gives the results. The conservation audit should show very small numbers; it checks that argon and charge are conserved by the integrator.
+An explanation of the entries in this output can be found at the top of novapor.py.
 
 ## Using `novapor.py` for a different liquid
 
 1. Open `simulation/novapor.py` and edit the **LIQUID PROPERTIES** block near the top. Set the name, the melting point, the default melt temperature T₀, and the temperature range over which your property fits are valid. Then fill in the four property functions. Each one takes T in kelvin and returns SI units. A plain number is fine, e.g. `return 7750.0`.
 2. Run `python simulation/novapor.py` with whatever options you need (see below).
 
-No data for your liquid? The **GUIDE: LIQUIDS WITHOUT GOOD PROPERTY DATA** at the bottom of `novapor.py` lists, best first:
+No data for your liquid? The **GUIDE: LIQUIDS WITHOUT GOOD PROPERTY DATA** at the bottom of `novapor.py` may help.
 
-- where to look for measured data
-- how to borrow properties from a similar liquid
-- simple estimates
-- typical ranges for metals, salts and other liquids
-
-It also says which properties matter most. Surface tension matters most because it sets the Blake threshold; sound speed matters least.
-
-**Note for liquid metals.** Their surface tensions are around 1 to 2 N/m, roughly ten times those of molten salts. This pushes the Blake threshold well above the 1.2 atm default for small bubbles. For example, a 5 µm bubble in molten cobalt has a threshold of about 3.7 atm. Below the threshold, the bubble only oscillates gently, and the output says so. Just above the threshold, the peak temperature rises very steeply with the pressure amplitude. In that range, a 10% uncertainty in surface tension can change the peak T by an order of magnitude. Larger bubbles are much less sensitive. Either way, run the sensitivity check described in the guide.
+**Note for liquid metals.** Their surface tensions are around 1 to 2 N/m, about ten times those of molten salts. This pushes the Blake threshold significantly higher than is typical for, e.g., NaCl for smaller bubbles. For example, a 5 µm bubble in molten cobalt has a threshold of about 3.7 atm. Below the threshold, the bubble only oscillates gently. Just above the threshold, the peak temperature rises very steeply with the pressure amplitude. In that range, a 10% uncertainty in surface tension can change the peak T by an order of magnitude. Larger bubbles are much less sensitive. Either way, run the sensitivity check described in the guide.
 
 ### When the vapor-free model applies
 
