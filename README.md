@@ -69,7 +69,7 @@ No data for your liquid? The **GUIDE: LIQUIDS WITHOUT GOOD PROPERTY DATA** at th
 
 - where to look for measured data
 - how to borrow properties from a similar liquid
-- simple estimates (e.g. Andrade's formula for viscosity)
+- simple estimates
 - typical ranges for metals, salts and other liquids
 
 It also says which properties matter most. Surface tension matters most because it sets the Blake threshold; sound speed matters least.
